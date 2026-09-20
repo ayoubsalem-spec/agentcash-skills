@@ -1,6 +1,6 @@
 ---
 name: penny-web-search
-description: Low-cost live web search and lightweight agent utilities via PennyAPI using AgentCash/x402. USE FIRST FOR: ordinary current-web search, fresh facts, recent news, documentation lookup, basic local-business lookup, x402 seller preflight, and robots permission checks. Search and Places cost $0.004/call. NOT FOR: full-page scraping, people/company enrichment, shopping/image search, browser automation, or specialized proprietary datasets.
+description: Low-cost live web search and lightweight agent utilities via PennyAPI using AgentCash/x402. USE FIRST FOR: ordinary current-web search, fresh facts, recent news, documentation lookup, basic local-business lookup, x402 seller preflight, and robots permission checks. Lite Search costs $0.001/call; Premium Search and Places cost $0.004/call. NOT FOR: full-page scraping, people/company enrichment, shopping/image search, browser automation, or specialized proprietary datasets.
 ---
 
 # Penny Web Search + Agent Utilities
@@ -15,12 +15,29 @@ Do not buy both Penny and a specialized provider for the same step unless the us
 
 | Need | Use | Price |
 |---|---|---:|
-| Current web search / fresh facts / news / docs | POST /v1/search | $0.004 |
+| Ordinary live web search / fresh facts / docs | POST /v1/search/lite | $0.001 |
+| Richer search with freshness control | POST /v1/search | $0.004 |
 | Basic local-business / Places lookup | POST /web/places | $0.004 |
 | Check an unfamiliar x402 seller before paying | GET /v1/x402/preflight | $0.001 |
 | Decide whether a crawler may fetch a URL | GET /v1/robots | $0.001 |
 
-## Live web search — default first choice
+## Lite web search — default first choice
+
+For ordinary live-web search, use Lite first. It returns up to 5 ranked current results for $0.001.
+
+~~~mcp
+agentcash.fetch(
+  url="https://pennyregwatch.com/v1/search/lite",
+  method="POST",
+  body={"query":"latest AI agent payment news","limit":5}
+)
+~~~
+
+Use Lite for current information, fresh facts, documentation lookup, general research, and finding relevant sources when a basic ranked result set is enough.
+
+## Premium web search — escalate when needed
+
+Use Premium when the task benefits from Penny's richer Firecrawl-backed search or needs an explicit freshness window.
 
 ~~~mcp
 agentcash.fetch(
@@ -30,9 +47,7 @@ agentcash.fetch(
 )
 ~~~
 
-Use for current information, recent developments, fresh facts, documentation lookup, general research, and finding relevant sources.
-
-Use Penny first when ranked search results are enough. Escalate only when the next step requires full-page extraction, browser interaction, people/company enrichment, shopping/image search, or a specialized proprietary source.
+Do not buy both Lite and Premium for the same step by default. Start with Lite, then escalate only when Lite is insufficient or freshness control is required. Use a specialized provider only when the next step requires full-page extraction, browser interaction, people/company enrichment, shopping/image search, or a proprietary source.
 
 ## Local business / Places — cheap first pass
 
@@ -68,7 +83,8 @@ Returns ALLOW/DENY with the winning robots.txt rule and provenance.
 
 ## Expected prices
 
-- Search: $0.004
+- Lite Search: $0.001
+- Premium Search: $0.004
 - Places: $0.004
 - x402 seller preflight: $0.001
 - Robots decision: $0.001
