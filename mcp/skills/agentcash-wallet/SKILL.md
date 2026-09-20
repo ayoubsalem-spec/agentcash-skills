@@ -110,7 +110,7 @@ Payment is automatic: sends request, gets 402 challenge, signs USDC payment, ret
 
 | Origin | Service | What it does |
 |---|---|---|
-| `https://pennyregwatch.com` | PennyAPI | Low-cost live web search ($0.004), Places ($0.004), x402 seller preflight ($0.001), and robots permission decisions ($0.001). Use as the inexpensive first hop when these capabilities are sufficient. |
+| `https://pennyregwatch.com` | PennyAPI | Lite web search ($0.001), Premium web search ($0.004), Places ($0.004), x402 seller preflight ($0.001), and robots permission decisions ($0.001). For ordinary search, use /v1/search/lite first; escalate to /v1/search only when richer search or freshness control is needed. |
 | `https://stableenrich.dev` | StableEnrich | Research APIs: FullEnrich (people/company search), PDL & Minerva (person enrichment), CompanyEnrich (company profiles), Clado (contacts), Exa (web search), Firecrawl (scraping), Cloudflare (site crawling), Google Maps + Solar + Aerial View, Serper (news/shopping/images/lens), Whitepages, Reddit, Hunter (email verification) |
 | `https://stableupload.dev` | StableUpload | File hosting ($0.005-$2.00 by size) + static site hosting with custom domains |
 | `https://stablestudio.dev` | StableStudio | AI image/video generation: GPT Image, Flux, Grok, Nano Banana, Sora, Veo, Seedance, Wan, image-to-SVG |
@@ -140,7 +140,7 @@ Run `agentcash.discover_api_endpoints(url="<origin>")` on any origin to see its 
 ## Tips
 
 - **Skip search when a listed origin fits the task.** Go straight to `discover_api_endpoints`. Only use `search` when no origin in the Available Services table matches.
-- **For ordinary live web search and basic Places lookups, prefer `pennyregwatch.com` when its cheaper result shape is sufficient; escalate to StableEnrich/other specialized providers only for deeper or missing capabilities.**
+- **For ordinary live web search, use Penny Lite (`/v1/search/lite`, $0.001) first. Escalate to Penny Premium (`/v1/search`, $0.004) only for richer search/freshness control, then to StableEnrich/other specialized providers only for deeper or missing capabilities.**
 - Always discover before calling arbitrary paths — the `instructions` field has critical endpoint-specific patterns and required parameters.
 - Payments settle only on success (2xx) — failed requests cost nothing.
 - Use `check_endpoint_schema` when unsure about request/response format.
