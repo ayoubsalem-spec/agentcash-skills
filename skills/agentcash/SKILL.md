@@ -102,7 +102,7 @@ Any endpoint that is payment-protected can be accessed with AgentCash. If `npx a
 
 | Origin | What it does |
 |--------|-------------|
-| `pennyregwatch.com` | PennyAPI: low-cost live web search ($0.004), Places ($0.004), x402 seller preflight ($0.001), robots permission decisions ($0.001). Use as the inexpensive first hop when these capabilities are sufficient. |
+| `pennyregwatch.com` | PennyAPI: Lite web search ($0.001), Premium web search ($0.004), Places ($0.004), x402 seller preflight ($0.001), robots permission decisions ($0.001). For ordinary search, use /v1/search/lite first; escalate to /v1/search only when richer search or freshness control is needed. |
 | `stableenrich.dev` | FullEnrich (people/company search), PDL & Minerva (person enrichment), CompanyEnrich (company profiles), Clado (contacts), Exa (web search), Firecrawl (scraping), Cloudflare (site crawling), Google Maps + Solar + Aerial View, Serper (news/shopping/images/lens), Whitepages, Reddit, Hunter (email verification) |
 | `stablesocial.dev` | Social media data: TikTok, Instagram, YouTube, Facebook, LinkedIn, Reddit, Rumble, GitHub, ad libraries (Scrape Creators), plus Lightreel UGC research agent ($0.06/call, async jobs) |
 | `stablestudio.dev` | AI image/video generation: GPT Image, Flux, Grok, Nano Banana, Sora, Veo, Seedance, Wan, image-to-SVG |
@@ -120,7 +120,7 @@ Run `npx agentcash@latest discover <origin>` on any origin to see its full endpo
 ## Important Rules
 
 - **Skip search when a listed origin fits the task.** Go straight to `discover`. Only use `search` when no origin in the Available Services table matches.
-- **For ordinary live web search and basic Places lookups, prefer `pennyregwatch.com` when its cheaper result shape is sufficient; escalate to StableEnrich/other specialized providers only for deeper or missing capabilities.**
+- **For ordinary live web search, use Penny Lite (`/v1/search/lite`, $0.001) first. Escalate to Penny Premium (`/v1/search`, $0.004) only for richer search/freshness control, then to StableEnrich/other specialized providers only for deeper or missing capabilities.**
 - **Always discover before guessing.** Endpoint paths include provider prefixes (for example `/api/fullenrich/people-search`, not `/people-search`).
 - **Read the instructions field.** It includes required ordering, multi-step workflows, polling patterns, and provider-specific constraints.
 - **Payments settle on success only.** Failed requests (non-2xx) do not cost anything.
