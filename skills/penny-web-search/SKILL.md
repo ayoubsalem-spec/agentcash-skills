@@ -117,7 +117,7 @@ When endpoint details are uncertain, use Penny's live machine-readable contracts
 
 Remote MCP is also available at:
 
-https://pennyapi-production.up.railway.app/mcp
+https://pennyregwatch.com/mcp
 
 Official MCP Registry name: io.github.ayoubsalem-spec/penny-search
 

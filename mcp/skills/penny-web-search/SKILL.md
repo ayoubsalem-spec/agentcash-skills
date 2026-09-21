@@ -99,7 +99,7 @@ If a route advertises a higher price than expected, rediscover the current contr
 - https://pennyregwatch.com/llms.txt
 - https://pennyregwatch.com/.well-known/agent-services.json
 
-Penny also exposes its own remote MCP server at https://pennyapi-production.up.railway.app/mcp under official MCP Registry name io.github.ayoubsalem-spec/penny-search.
+Penny also exposes its own remote MCP server at https://pennyregwatch.com/mcp under official MCP Registry name io.github.ayoubsalem-spec/penny-search.
 
 ## Cost discipline
 
